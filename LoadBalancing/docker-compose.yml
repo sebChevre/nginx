@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    ports:
+    - "80:80"
+    build: 
+      context: ./Nginx
+    networks: 
+      - nginx-front
+      - global
+
+  nodeapp1:
+    image: sebchevre/nodeapp
+    container_name: nodeapp1
+    build: 
+      context: ./NodeApp
+    ports:
+    - "8081:8080"
+    networks: 
+      - nginx-front
+      - global
+
+  nodeapp2:
+    image: sebchevre/nodeapp
+    container_name: nodeapp2
+    build: 
+      context: ./NodeApp
+    ports:
+    - "8082:8080"
+    networks: 
+      - nginx-front
+      - global
+
+  nodeapp3:
+    image: sebchevre/nodeapp
+    container_name: nodeapp3
+    build: 
+      context: ./NodeApp
+    ports:
+    - "8083:8080"
+    networks: 
+      - nginx-front
+      - global
+
+
+networks: 
+  global:
+  nginx-front:
